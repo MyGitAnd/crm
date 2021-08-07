@@ -24,6 +24,8 @@ public class CustomerRemark {
     private String customerId;
     private String owner;
 
+    @Transient
+    private String contactsRemark;
     //Transient:让实体类中的属性可以在数据库表中不存在
     @Transient
     private String img;

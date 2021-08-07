@@ -3,12 +3,15 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" +
             request.getServerPort() + request.getContextPath();
 %>
+<%
+    String Path = request.getScheme()+"://"+"www.nginx.com";
+%>
 <html>
 <head>
     <title>客户和联系人统计报表</title>
     <!-- 引入 echarts.js -->
-    <script type="text/javascript" src="<%=basePath%>/jquery/jquery-1.11.1-min.js"></script>
-    <script src="<%=basePath%>/jquery/ECharts/echarts.min.js"></script>
+    <script type="text/javascript" src="<%=Path%>/jquery/jquery-1.11.1-min.js"></script>
+    <script src="<%=Path%>/jquery/ECharts/echarts.min.js"></script>
 </head>
 <body>
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->

@@ -5,21 +5,24 @@
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+
 request.getServerPort()+request.getContextPath();
 %>
+<%
+    String Path = request.getScheme()+"://"+"www.nginx.com";
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <%--客户页面--%>
-<link href="<%=basePath%>/jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
-<link href="<%=basePath%>/jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet"/>
-<script type="text/javascript" src="<%=basePath%>/jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript" src="<%=basePath%>/jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<%=basePath%>/jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="<%=basePath%>/jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
-<script type="text/javascript" src="<%=basePath%>/jquery/bs_pagination/en.js"></script>
-<script type="text/javascript" src="<%=basePath%>/jquery/bs_pagination/jquery.bs_pagination.min.js"></script>
-<script type="text/javascript" src="<%=basePath%>/jquery/layui/layui.js"></script>
-<script type="text/javascript" src="<%=basePath%>/jquery/bs_typeahead/bootstrap3-typeahead.min.js"></script>
+<link href="<%=Path%>/jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+<link href="<%=Path%>/jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="<%=Path%>/jquery/jquery-1.11.1-min.js"></script>
+<script type="text/javascript" src="<%=Path%>/jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=Path%>/jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="<%=Path%>/jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="<%=Path%>/jquery/bs_pagination/en.js"></script>
+<script type="text/javascript" src="<%=Path%>/jquery/bs_pagination/jquery.bs_pagination.min.js"></script>
+<script type="text/javascript" src="<%=Path%>/jquery/layui/layui.js"></script>
+<script type="text/javascript" src="<%=Path%>/jquery/bs_typeahead/bootstrap3-typeahead.min.js"></script>
 <script type="text/javascript">
 
 	//默认情况下取消和保存按钮是隐藏的
@@ -709,7 +712,7 @@ request.getServerPort()+request.getContextPath();
                 dataType:"json",
                 success:function (data) {
                     if (data.ok) {
-                        layer.alert(data.message, {
+                        layer.alert(data.message+"…… 即将刷新页面!", {
                             icon: 6,
                             skin: 'layer-ext-demo'
                         });
@@ -719,7 +722,10 @@ request.getServerPort()+request.getContextPath();
                         var  customerRemarks = [];
                         customerRemarks[0] = customerRemark;
                         selectCustomerRemark(customerRemarks)
-
+                        //延迟刷新页面
+                        window.setTimeout(function () {
+                            window.location.reload();
+                        },2000)
                     }else {
                         layer.alert(data.message, {
                             icon: 5,
@@ -1037,12 +1043,11 @@ request.getServerPort()+request.getContextPath();
     function selectCustomerRemark(customerRemarks) {
         for (var i = 0;i < customerRemarks.length;i++){
             var customerRemark = customerRemarks[i];
-
             $("#remarkDiv").before("<div class=\"remarkDiv\" style=\"height: 60px;\">\n" +
                 "\t\t\t<img title=\"zhangsan\" src=\""+customerRemark.img+"\" style=\"width: 30px; height:30px;\">\n" +
                 "\t\t\t<div style=\"position: relative; top: -40px; left: 40px;\" >\n" +
                 "\t\t\t\t<h5 id ='h5"+customerRemark.id+"'>"+customerRemark.noteContent+"</h5>\n" +
-                "\t\t\t\t<font color=\"gray\">联系人</font> <font color=\"gray\">-</font> <b>"+customerRemark.customerId+"</b> <small style=\"color: gray;\">"+customerRemark.createTime+" 由"+customerRemark.createBy+"</small>\n" +
+                "\t\t\t\t<font color=\"gray\">联系人</font> <font color=\"gray\">-</font> <b>"+customerRemark.contactsRemark+"-"+customerRemark.customerId+"</b> <small style=\"color: gray;\">"+customerRemark.createTime+" 由"+customerRemark.createBy+"</small>\n" +
                 "\t\t\t\t<div style=\"position: relative; left: 500px; top: -30px; height: 30px; width: 100px; display: none;\">\n" +
                 "\t\t\t\t\t<a class=\"myHref\" href=\"javascript:void(0);\" onclick=\"openEditModal('"+customerRemark.noteContent+"','"+customerRemark.id+"')\"><span class=\"glyphicon glyphicon-edit\" style=\"font-size: 20px; color: #E6E6E6;\"></span></a>\n" +
                 "\t\t\t\t\t&nbsp;&nbsp;&nbsp;&nbsp;\n" +

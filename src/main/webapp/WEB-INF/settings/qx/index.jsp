@@ -4,13 +4,16 @@
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+
             request.getServerPort()+request.getContextPath();
 %>
+<%
+    String Path = request.getScheme()+"://"+"www.nginx.com";
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="<%=basePath%>/jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="<%=basePath%>/jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript" src="<%=basePath%>/jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<link href="<%=Path%>/jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="<%=Path%>/jquery/jquery-1.11.1-min.js"></script>
+<script type="text/javascript" src="<%=Path%>/jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
 	//页面加载完毕

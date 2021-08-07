@@ -28,6 +28,9 @@ public class Customer {
     private String description;//描述
     private String address;//地址
 
+    @Transient
+    private String contactsId;
+
     private  List<CustomerRemark> customerRemarks;//客户对应的备注信息
 
     @Transient

@@ -155,6 +155,12 @@ public class CustomerServiceImpl implements CustomerService {
         User user = userMapper.selectByPrimaryKey(customer.getOwner());
         customer.setOwner(user.getName());
 
+        Contacts contacts = new Contacts();
+        contacts.setCustomerId(id);
+        List<Contacts> select = contactsMapper.select(contacts);
+        for (Contacts contacts1 : select) {
+            customer.setContactsId(contacts1.getFullname()+contacts1.getAppellation());
+        }
         CustomerRemark customerRemark = new CustomerRemark();
         customerRemark.setCustomerId(customer.getId());
         List<CustomerRemark> customerRemarks = customerRemarkMapper.select(customerRemark);
@@ -162,6 +168,11 @@ public class CustomerServiceImpl implements CustomerService {
             remark.setCustomerId(customer.getName());
             User user1 = userMapper.selectByPrimaryKey(remark.getOwner());
             remark.setImg(user1.getImg());
+            for (Contacts contacts1 : select) {
+//            customer.setContactsId(contacts1.getFullname()+contacts1.getAppellation());
+                remark.setContactsRemark(contacts1.getFullname()+contacts1.getAppellation());
+
+            }
         }
         //把集合放到用户对象
         customer.setCustomerRemarks(customerRemarks);
